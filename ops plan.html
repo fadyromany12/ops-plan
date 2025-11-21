@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Ops Ascension</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom scrollbar for cleaner look in the content area */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-900">
+
+    <!-- Header -->
+    <header class="max-w-5xl mx-auto mb-8 bg-gradient-to-r from-red-600 to-slate-900 text-white rounded-xl p-6 shadow-lg">
+        <div class="flex flex-col md:flex-row md:items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold flex items-center gap-2">
+                    <i data-lucide="trophy" class="w-6 h-6 text-yellow-400"></i>
+                    Project: Ops Ascension
+                </h1>
+                <p class="text-red-100 mt-1">Lenovo Account • Launch Phase • Dec/Jan Wave Prep</p>
+            </div>
+            <div class="mt-4 md:mt-0 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+                <p class="text-xs text-red-100 uppercase tracking-wider">Current Focus</p>
+                <p class="font-bold">Stabilize & Scale</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="max-w-5xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden min-h-[600px] flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <nav class="w-full md:w-64 bg-slate-100 border-r p-4 flex flex-row md:flex-col gap-2 overflow-x-auto shrink-0">
+            <button onclick="switchTab('timeline')" id="btn-timeline" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left bg-white text-red-600 shadow-md">
+                <i data-lucide="calendar" class="w-4 h-4"></i> <span class="whitespace-nowrap">Timeline (Nov-Jan)</span>
+            </button>
+            
+            <button onclick="switchTab('kpi')" id="btn-kpi" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left text-slate-500 hover:bg-slate-200">
+                <i data-lucide="bar-chart-3" class="w-4 h-4"></i> <span class="whitespace-nowrap">KPI Dashboard</span>
+            </button>
+            
+            <button onclick="switchTab('logistics')" id="btn-logistics" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left text-slate-500 hover:bg-slate-200">
+                <i data-lucide="users" class="w-4 h-4"></i> <span class="whitespace-nowrap">Wave Logistics</span>
+            </button>
+            
+            <button onclick="switchTab('risks')" id="btn-risks" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left text-slate-500 hover:bg-slate-200">
+                <i data-lucide="shield-alert" class="w-4 h-4"></i> <span class="whitespace-nowrap">Risk Register</span>
+            </button>
+            
+            <button onclick="switchTab('governance')" id="btn-governance" class="nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left text-slate-500 hover:bg-slate-200">
+                <i data-lucide="clipboard-check" class="w-4 h-4"></i> <span class="whitespace-nowrap">Process & SOPs</span>
+            </button>
+        </nav>
+
+        <!-- Dynamic Content Area -->
+        <div id="content-area" class="flex-1 p-6 md:p-8 overflow-y-auto">
+            <!-- Content injected via JS -->
+        </div>
+
+    </main>
+
+    <!-- Footer Tip -->
+    <div class="max-w-5xl mx-auto mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100 flex items-start gap-3">
+        <i data-lucide="target" class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1"></i>
+        <div>
+            <h4 class="font-bold text-blue-800 text-sm">Pro-Tip for Promotion:</h4>
+            <p class="text-blue-700 text-sm mt-1">
+                Ops Managers solve problems before they happen. When you present this plan to your boss, don't say "Here is what I think." Say: 
+                <span class="italic font-semibold"> "Here is the infrastructure I have built to ensure the December wave hits 100% of their target by Week 3."</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DATA ---
+        const timelineData = [
+            {
+                phase: "Phase 1: Foundation (NOW - Nov 30)",
+                focus: "Stabilization & Documentation",
+                tasks: [
+                    { task: "Build Master Performance Tracker (WBR View)", status: "Urgent", owner: "You", type: "Data" },
+                    { task: "Document 'Perfect Call' Flow (Standardize the 5 reps)", status: "Pending", owner: "You + Top Rep", type: "Process" },
+                    { task: "Create 'Cheat Sheets' for Objection Handling", status: "Done", owner: "You", type: "Sales" },
+                    { task: "Identify Top 2 Reps as 'Floor Walkers' for Dec Wave", status: "In Progress", owner: "You", type: "People" },
+                    { task: "Audit CRM Data Integrity (Clean junk leads before scaling)", status: "Urgent", owner: "You", type: "Ops" },
+                    { task: "Calibration Session with Client (Align on QA scoring)", status: "Pending", owner: "You", type: "Quality" }
+                ]
+            },
+            {
+                phase: "Phase 2: The Dec Wave (Dec 1 - Dec 31)",
+                focus: "Scalability Proof of Concept",
+                tasks: [
+                    { task: "IT Handshake: Verify Headsets/Licenses 48hrs prior", status: "Future", owner: "You + IT", type: "Ops" },
+                    { task: "Launch 'Buddy System' (New hires shadow your Top 5)", status: "Future", owner: "You", type: "People" },
+                    { task: "Daily 'War Room' Stand-up (15 mins - Blockers only)", status: "Future", owner: "You", type: "Ops" },
+                    { task: "Implement 'Red Flag' System (Day 3 Attrition check)", status: "Future", owner: "You", type: "HR" },
+                    { task: "Present 'Launch Success' Report to Client", status: "Critical", owner: "You", type: "Strategy" }
+                ]
+            },
+            {
+                phase: "Phase 3: Full Ops Mode (Jan 1 - Onwards)",
+                focus: "Optimization & Consistency",
+                tasks: [
+                    { task: "Implement formal PIP (Performance Improvement) process", status: "Future", owner: "You", type: "HR" },
+                    { task: "Forecast Q1 Hiring Needs vs Lead Flow", status: "Future", owner: "You", type: "Strategy" },
+                    { task: "Assume full financial reporting (Billable Hours/Margin)", status: "Goal", owner: "You", type: "Finance" }
+                ]
+            }
+        ];
+
+        const kpiData = [
+            { metric: "Sales Conversion", goal: "15%+", freq: "Hourly", note: "The heartbeat. Monitor hourly to spot drifts." },
+            { metric: "Lead Utilization", goal: "90%+", freq: "Daily", note: "Are we burning leads? (Called vs Answered vs Closed). Crucial for Ops efficiency." },
+            { metric: "AHT (Handle Time)", goal: "< 450s", freq: "Daily", note: "Lower AHT = Higher Margin. Ops Managers obsess over this." },
+            { metric: "Occupancy", goal: "85%", freq: "Daily", note: "% of time reps are actually working vs idle. Too high = burnout; Too low = waste." },
+            { metric: "Attendance/Shrinkage", goal: "< 5%", freq: "Daily", note: "If heads aren't in seats, we lose money. Track strictly." },
+            { metric: "Ramp Speed", goal: "2 Weeks", freq: "Per Wave", note: "Time to 80% quota. This is your 'Ops Superpower' metric." }
+        ];
+
+        const logisticsData = [
+            { category: "Tech Readiness", item: "Are all Lenovo portal logins created & tested?", deadline: "T-minus 5 Days", check: false },
+            { category: "Tech Readiness", item: "Do we have enough active CRM licenses?", deadline: "T-minus 5 Days", check: false },
+            { category: "People", item: "Assign Seating Chart (Mix New Hires with Old)", deadline: "T-minus 2 Days", check: false },
+            { category: "Training", item: "Print 'Battle Cards' (Product Specs/Pricing)", deadline: "T-minus 1 Day", check: false },
+            { category: "Ops", item: "Create temporary 'Nesting' scorecard (lower targets)", deadline: "T-minus 3 Days", check: false },
+            { category: "Access", item: "Building Access Cards for new wave requested?", deadline: "T-minus 7 Days", check: false },
+        ];
+
+        const riskData = [
+            { risk: "System Outage/CRM Down", impact: "High", mitigation: "Create manual 'Downtime Trackers' (paper forms) so sales continue offline.", status: "Open" },
+            { risk: "High Attrition in Dec Wave", impact: "High", mitigation: "Over-recruit by 10% to create a buffer. Implement 'Day 1' Welcome warm-up.", status: "Planned" },
+            { risk: "Lead Source Dry Up", impact: "Critical", mitigation: "Flag lead volume trends to Client 2 weeks in advance. Request new data lists.", status: "Monitoring" },
+            { risk: "Knowledge Gap (SME Burnout)", impact: "Medium", mitigation: "Rotate the 5 current reps on 'Floor Walking' shifts so they don't stop selling.", status: "Planned" }
+        ];
+
+        // --- HELPERS ---
+        function getStatusColor(status) {
+            if (status === 'Urgent' || status === 'Critical') return 'bg-red-100 text-red-700';
+            if (status === 'Future') return 'bg-purple-100 text-purple-700';
+            if (status === 'Done') return 'bg-green-100 text-green-700';
+            return 'bg-amber-100 text-amber-700';
+        }
+
+        function getImpactColor(impact) {
+            return (impact === 'Critical' || impact === 'High') ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-800';
+        }
+
+        // --- RENDER FUNCTIONS ---
+        function renderTimeline() {
+            return `
+                <div class="space-y-6">
+                    <div class="bg-blue-50 border-l-4 border-blue-600 p-4 mb-6">
+                        <p class="text-blue-800 text-sm font-medium">
+                            <strong>Strategy:</strong> This timeline proves you aren't just reacting to the day, but planning for the quarter.
+                        </p>
+                    </div>
+                    ${timelineData.map(phase => `
+                        <div class="bg-white border rounded-lg shadow-sm overflow-hidden mb-6">
+                            <div class="bg-slate-100 px-4 py-3 border-b flex justify-between items-center">
+                                <h3 class="font-bold text-slate-700">${phase.phase}</h3>
+                                <span class="text-xs font-bold px-2 py-1 bg-slate-200 text-slate-600 rounded uppercase">${phase.focus}</span>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm text-left">
+                                    <thead class="bg-slate-50 text-slate-500">
+                                        <tr>
+                                            <th class="px-4 py-2">Task</th>
+                                            <th class="px-4 py-2">Type</th>
+                                            <th class="px-4 py-2">Owner</th>
+                                            <th class="px-4 py-2">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        ${phase.tasks.map(t => `
+                                            <tr>
+                                                <td class="px-4 py-3 font-medium text-slate-700">${t.task}</td>
+                                                <td class="px-4 py-3">
+                                                    <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded border">${t.type}</span>
+                                                </td>
+                                                <td class="px-4 py-3 text-slate-500">${t.owner}</td>
+                                                <td class="px-4 py-3">
+                                                    <span class="px-2 py-1 rounded-full text-xs font-bold ${getStatusColor(t.status)}">
+                                                        ${t.status}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderKPIs() {
+            return `
+                <div>
+                    <div class="bg-green-50 border-l-4 border-green-600 p-4 mb-6">
+                        <p class="text-green-800 text-sm font-medium">
+                            <strong>The "Ops" Dashboard:</strong> Don't just track these. Send a summary of these to your boss every Friday at 2 PM.
+                        </p>
+                    </div>
+                    <div class="grid gap-4 overflow-x-auto">
+                        <table class="w-full text-sm text-left border rounded-lg overflow-hidden">
+                            <thead class="bg-slate-800 text-white">
+                                <tr>
+                                    <th class="px-4 py-3">Metric Name</th>
+                                    <th class="px-4 py-3">Target Goal</th>
+                                    <th class="px-4 py-3">Frequency</th>
+                                    <th class="px-4 py-3">Why Ops Managers Care</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white">
+                                ${kpiData.map(k => `
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="px-4 py-3 font-bold text-slate-700">${k.metric}</td>
+                                        <td class="px-4 py-3 font-mono text-blue-600 font-bold">${k.goal}</td>
+                                        <td class="px-4 py-3 text-slate-500">${k.freq}</td>
+                                        <td class="px-4 py-3 text-slate-600 italic">${k.note}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLogistics() {
+            return `
+                <div>
+                    <div class="bg-amber-50 border-l-4 border-amber-600 p-4 mb-6">
+                        <p class="text-amber-800 text-sm font-medium">
+                            <strong>Wave Readiness:</strong> This is where you win the job. If the December wave starts smoothly because of you, you are the Ops Manager.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-lg border shadow-sm overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-100 text-slate-600 uppercase text-xs">
+                                <tr>
+                                    <th class="px-4 py-3">Category</th>
+                                    <th class="px-4 py-3">Verification Item</th>
+                                    <th class="px-4 py-3">Deadline</th>
+                                    <th class="px-4 py-3 text-center">Done?</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                ${logisticsData.map(item => `
+                                    <tr>
+                                        <td class="px-4 py-3 font-bold text-slate-500">${item.category}</td>
+                                        <td class="px-4 py-3">${item.item}</td>
+                                        <td class="px-4 py-3 text-red-600 font-medium">${item.deadline}</td>
+                                        <td class="px-4 py-3 text-center">
+                                            <input type="checkbox" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300" ${item.check ? 'checked' : ''} />
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderRisks() {
+            return `
+                <div>
+                    <div class="bg-red-50 border-l-4 border-red-600 p-4 mb-6">
+                        <p class="text-red-800 text-sm font-medium">
+                            <strong>Risk Register:</strong> Showing you anticipate problems *before* they happen is the hallmark of a Senior Ops Manager.
+                        </p>
+                    </div>
+                    <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+                        ${riskData.map(r => `
+                            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-slate-800 flex items-center gap-2">
+                                            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i>
+                                            ${r.risk}
+                                        </h4>
+                                        <span class="text-xs font-bold px-2 py-1 rounded uppercase ${getImpactColor(r.impact)}">
+                                            ${r.impact}
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 mb-3">
+                                        <strong>Mitigation:</strong> ${r.mitigation}
+                                    </p>
+                                </div>
+                                <div class="mt-2 pt-2 border-t text-xs text-slate-400 font-medium">
+                                    Status: ${r.status}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGovernance() {
+            return `
+                <div class="space-y-6">
+                    <div class="p-6 bg-white rounded-lg border shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                            <i data-lucide="clipboard-check" class="w-5 h-5 mr-2 text-red-600"></i>
+                            The "S.O.P." Library
+                        </h3>
+                        <p class="text-slate-600 mb-4 text-sm">
+                            Create these 4 documents immediately. Store them in a shared folder and send the link to your Director.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start p-3 bg-slate-50 rounded">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <span class="font-bold text-slate-700">The Attendance Policy</span>
+                                    <p class="text-xs text-slate-500 mt-1">Exactly what happens when someone is late? (Verbal → Written → Final). Don't make it up as you go.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start p-3 bg-slate-50 rounded">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <span class="font-bold text-slate-700">The End-of-Day (EOD) Report Format</span>
+                                    <p class="text-xs text-slate-500 mt-1">A standard template all reps (and you) fill out daily: Calls Made, Sales Closed, Blockers.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start p-3 bg-slate-50 rounded">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <span class="font-bold text-slate-700">The Escalation Matrix</span>
+                                    <p class="text-xs text-slate-500 mt-1">Who do we call when the internet dies? Who do we call when a customer asks for legal? Write it down.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start p-3 bg-slate-50 rounded">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                                <div>
+                                    <span class="font-bold text-slate-700">The Q1 Forecast</span>
+                                    <p class="text-xs text-slate-500 mt-1">A simple Excel sheet predicting performance for Jan/Feb/Mar based on hiring numbers.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- LOGIC ---
+        function switchTab(tabName) {
+            const contentArea = document.getElementById('content-area');
+            const buttons = document.querySelectorAll('.nav-btn');
+            
+            // Update Content
+            switch(tabName) {
+                case 'timeline': contentArea.innerHTML = renderTimeline(); break;
+                case 'kpi': contentArea.innerHTML = renderKPIs(); break;
+                case 'logistics': contentArea.innerHTML = renderLogistics(); break;
+                case 'risks': contentArea.innerHTML = renderRisks(); break;
+                case 'governance': contentArea.innerHTML = renderGovernance(); break;
+            }
+
+            // Update Buttons styling
+            buttons.forEach(btn => {
+                // Reset to inactive state
+                btn.className = "nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left text-slate-500 hover:bg-slate-200";
+            });
+
+            // Set active state
+            const activeBtn = document.getElementById(`btn-${tabName}`);
+            activeBtn.className = "nav-btn flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full text-left bg-white text-red-600 shadow-md";
+
+            // Refresh Icons
+            lucide.createIcons();
+        }
+
+        // Initialize
+        window.onload = () => {
+            lucide.createIcons(); // Initial header/footer icons
+            switchTab('timeline'); // Default Tab
+        };
+
+    </script>
+</body>
+</html>
